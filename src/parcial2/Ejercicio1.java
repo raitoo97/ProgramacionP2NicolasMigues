@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 public class Ejercicio1 {
 	private String[] namesOfStudents;
 	private int[] studentGrades;
+	
 	private int numberOfStudents;
 	int input = 0;
 	public void Excerice1() {
@@ -12,8 +13,7 @@ public class Ejercicio1 {
 		InputStudentsNames();
 		InputStudentsGrades();
 		BubbleSort();
-		boolean condition = input == 0;
-		while(condition) {
+		while(input == 0) {
 			checkStudentsPass();
 			input = Integer.parseInt(JOptionPane.showInputDialog(null,"Presiona 0 si deseas volver a consultar la nota o presiona cualquierotra numero para salir"));
 		}
@@ -21,23 +21,31 @@ public class Ejercicio1 {
 	}
 	
 	private void InputStudentsNames() {
-		numberOfStudents =Integer.parseInt(JOptionPane.showInputDialog(null, "Que cantidad de estudiantes quisiera ingresar: ")); 
+		do {
+			numberOfStudents =Integer.parseInt(JOptionPane.showInputDialog(null, "Que cantidad de estudiantes quisiera ingresar: "));
+			if (numberOfStudents <= 0) 
+				JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor que 0");
+		}while(numberOfStudents <= 0);
+		
+		namesOfStudents = new String[numberOfStudents];
+		studentGrades = new int[numberOfStudents];
 		for (int i = 0; i < numberOfStudents; i++) {
-			namesOfStudents[i] = JOptionPane.showInputDialog(null,"Ingrese nombre de estudiante");
+			namesOfStudents[i] = JOptionPane.showInputDialog(null, "Ingrese el nombre del estudiante " + (i + 1));
 		}
 	}
 	
 	private void InputStudentsGrades() {
 		for (int i = 0; i < numberOfStudents; i++) {
-			boolean validNote = studentGrades[i] > 0 && studentGrades[i] <= 0;
+			int grade;
 			do {
-				studentGrades[i] = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese notas de estudiante"));
-				if(validNote) {
-					JOptionPane.showMessageDialog(null, "Nota Ingresada con exito");
+				grade = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la nota de " + namesOfStudents[i]));
+				if (grade < 0 || grade > 10) {
+					JOptionPane.showMessageDialog(null, "Nota incorrecta\nLa nota debe ir entre 0 y 10");
 				}else {
-					JOptionPane.showMessageDialog(null, "Nota incorrecta" + "\n" + " La nota debe ir entre 1 y 10");
+					JOptionPane.showMessageDialog(null, "Nota ingresada con exito!");
 				}
-			}while(validNote);
+			}while(grade < 0 || grade > 10);
+			studentGrades[i] = grade;
 		}
 	}
 	
@@ -60,21 +68,38 @@ public class Ejercicio1 {
 					int aux = studentGrades[j];
 					studentGrades[j] = studentGrades[j + 1];
 					studentGrades[j + 1] = aux;
+					String auxName = namesOfStudents[j];
+					namesOfStudents[j] = namesOfStudents[j + 1];
+					namesOfStudents[j + 1] = auxName;
+					
 				}
 			}
 		}
 	}
+	private int lowestGrade() {
+		return studentGrades[0];
+	}
+	
+	private int highestGrade() {
+		return studentGrades[numberOfStudents - 1];
+	}
+	
+	private boolean hasPassed(int grade) {
+		return grade >= 6;
+	}
 	
 	private void checkStudentsPass(){
-		boolean condition = input == 0;
-		for (int i = 0; i < studentGrades.length; i++) {
-			boolean hasPassed = studentGrades[i] >= 6;
-			if(hasPassed) {
-				JOptionPane.showMessageDialog(null,"El estudiante llamado: " + namesOfStudents[i] + "Aprobo con: " + studentGrades[i]);
-			}else {
-				JOptionPane.showMessageDialog(null,"El estudiante llamado: " + namesOfStudents[i] + "desaprobo con: " + studentGrades[i]);
+		String list = "Listado de estudiantes:\n";
+		for (int i = 0; i < numberOfStudents; i++) {
+			if (hasPassed(studentGrades[i])) {
+				list += namesOfStudents[i] + " - Nota: " + studentGrades[i] + " - Aprobo\n";
+			} else {
+				list += namesOfStudents[i] + " - Nota: " + studentGrades[i] + " - Desaprobo\n";
 			}
 		}
-		JOptionPane.showMessageDialog(null, "El promedio general de la cursada fue: " + CalculateAverage());
+		list += "\nPromedio general del curso: " + CalculateAverage();
+		list += "\nNota mas alta: " + highestGrade();
+		list += "\nNota mas baja: " + lowestGrade();
+		JOptionPane.showMessageDialog(null, list);
 	}
 }
