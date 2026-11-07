@@ -55,7 +55,7 @@ public class Ejercicio1 {
 		for (int i = 0; i < studentGrades.length; i++) {
 			total += studentGrades[i];
 		}
-		average = total / numberOfStudents;
+		average =(float) total / numberOfStudents;
 		return average;
 	}
 	
