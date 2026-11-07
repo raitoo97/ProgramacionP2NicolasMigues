@@ -7,7 +7,7 @@ public class Ejercicio1 {
 	private int[] studentGrades;
 	
 	private int numberOfStudents;
-	int input = 0;
+	private int input = 0;
 	public void Excerice1() {
 		JOptionPane.showMessageDialog(null, "Hola bienvenido al sistema de gestion de notas");
 		InputStudentsNames();
@@ -15,7 +15,7 @@ public class Ejercicio1 {
 		BubbleSort();
 		while(input == 0) {
 			checkStudentsPass();
-			input = Integer.parseInt(JOptionPane.showInputDialog(null,"Presiona 0 si deseas volver a consultar la nota o presiona cualquierotra numero para salir"));
+			input = Integer.parseInt(JOptionPane.showInputDialog(null,"Presiona 0 si deseas volver a consultar la nota o presiona cualquier otro numero para salir"));
 		}
 		
 	}
