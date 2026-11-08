@@ -21,6 +21,7 @@ public class Ejercicio3 {
 	}
 
 	private void Play() {
+		score = 0;
 		for (int i = 0; i < riddles.length; i++) {
 			String answer = JOptionPane.showInputDialog(null, "Adivinanza " + (i + 1) + ":\n" + riddles[i]);
 			if (IsCorrect(i, answer)) {
