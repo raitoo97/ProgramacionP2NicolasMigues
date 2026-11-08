@@ -15,6 +15,7 @@ public class Ejercicio3 {
 		int input;
 		do {
 			Play();
+			String number;
 			input = Integer.parseInt(JOptionPane.showInputDialog(null, "Presiona 0 para jugar otra ronda o cualquier otro numero para salir"));
 		} while (input == 0);
 		JOptionPane.showMessageDialog(null, "Gracias por jugar!");
