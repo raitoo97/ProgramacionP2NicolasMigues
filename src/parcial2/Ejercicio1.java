@@ -22,7 +22,17 @@ public class Ejercicio1 {
 	
 	private void InputStudentsNames() {
 		do {
-			numberOfStudents =Integer.parseInt(JOptionPane.showInputDialog(null, "Que cantidad de estudiantes quisiera ingresar: "));
+			String number = JOptionPane.showInputDialog(null, "Que cantidad de estudiantes quisiera ingresar: ");
+			if(number == null || number.trim().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Debes ingresar un valor numerico","Error",JOptionPane.ERROR_MESSAGE);
+			}
+			try {
+				numberOfStudents =Integer.parseInt(number.trim());
+			} catch (NumberFormatException error) {
+				JOptionPane.showMessageDialog(null, "Debes Ingresar un valor numerico","Error",JOptionPane.ERROR_MESSAGE);
+				numberOfStudents = 0;
+				continue;
+			}
 			if (numberOfStudents <= 0) 
 				JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor que 0");
 		}while(numberOfStudents <= 0);
@@ -38,7 +48,20 @@ public class Ejercicio1 {
 		for (int i = 0; i < numberOfStudents; i++) {
 			int grade;
 			do {
-				grade = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la nota de " + namesOfStudents[i]));
+				String number = JOptionPane.showInputDialog(null, "Ingrese la nota de " + namesOfStudents[i]);
+				if(number == null || number.trim().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Debes ingresar un valor numerico","Error",JOptionPane.ERROR_MESSAGE);
+					grade = -1;
+					continue;
+				}
+				try {
+					grade = Integer.parseInt(number.trim());
+					
+				} catch (NumberFormatException error) {
+					JOptionPane.showMessageDialog(null, "Debes ingresar un valor numerico","Error",JOptionPane.ERROR_MESSAGE);
+					grade = -1;
+					continue;
+				}
 				if (grade < 0 || grade > 10) {
 					JOptionPane.showMessageDialog(null, "Nota incorrecta\nLa nota debe ir entre 0 y 10");
 				}else {
