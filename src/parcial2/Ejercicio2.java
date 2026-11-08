@@ -32,12 +32,16 @@ public class Ejercicio2 {
 			    option = 4;
 			    continue;
 			}
+			if (number.trim().isEmpty()) {
+				JOptionPane.showMessageDialog(null,"Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+				option = 0;
+			    continue;
+			}
 
 			try {
 			    option = Integer.parseInt(number.trim());
 			} catch (NumberFormatException error) {
 			    JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
-			    JOptionPane.showMessageDialog(null, error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			    option = -1;
 			    continue;
 			}
@@ -76,7 +80,6 @@ public class Ejercicio2 {
 				numberOfProducts = Integer.parseInt(number.trim());
 			} catch (NumberFormatException error) {
 		        JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
-		        JOptionPane.showMessageDialog(null, error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
 		        numberOfProducts = 0;
 		        continue;
 		        
@@ -109,7 +112,6 @@ public class Ejercicio2 {
 			        price = Integer.parseInt(number.trim());
 			    } catch (NumberFormatException error) {
 			        JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
-			        JOptionPane.showMessageDialog(null, error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			        price = 0;
 			        continue;
 			    }
@@ -135,7 +137,6 @@ public class Ejercicio2 {
 				
 			} catch (NumberFormatException error) {
 		        JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
-		        JOptionPane.showMessageDialog(null, error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
 		        maxSales = 0;
 		        continue;
 			}
@@ -164,8 +165,7 @@ public class Ejercicio2 {
 				try {
 					code = Integer.parseInt(number.trim());
 				} catch (NumberFormatException error) {
-			        JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
-			        JOptionPane.showMessageDialog(null, error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
+			        JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE); 
 			        code = -1;
 			        continue;
 				}
@@ -186,7 +186,6 @@ public class Ejercicio2 {
 			    } 
 			    catch (NumberFormatException error) {
 			        JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
-			        JOptionPane.showMessageDialog(null, error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
 			        quantity = 0;
 			        continue;
 			    }
