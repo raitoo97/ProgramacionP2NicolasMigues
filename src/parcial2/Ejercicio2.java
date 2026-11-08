@@ -52,9 +52,16 @@ public class Ejercicio2 {
 	private void RegisterProducts() {
 		int numberOfProducts;
 		do {
-			numberOfProducts = Integer.parseInt(JOptionPane.showInputDialog(null, "Cuantos productos tiene la tienda?"));
+			String text = JOptionPane.showInputDialog(null, "Cuantos productos tiene la tienda?");
+			try {
+				numberOfProducts = Integer.parseInt(text.trim());
+			} catch (NumberFormatException error) {
+		        JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+		        JOptionPane.showMessageDialog(null, error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
+		        numberOfProducts = 0;
+			}
 			if (numberOfProducts <= 0) {
-				JOptionPane.showMessageDialog(null, "La cantidad de productos debe ser mayor a 0");
+				JOptionPane.showMessageDialog(null, "La cantidad de productos debe ser mayor a 0","Error",JOptionPane.ERROR_MESSAGE);
 			}
 		} while (numberOfProducts <= 0);
 		products = new String[numberOfProducts];
@@ -70,7 +77,7 @@ public class Ejercicio2 {
 		do {
 			maxSales = Integer.parseInt(JOptionPane.showInputDialog(null, "Cuantas ventas como maximo queres registrar?"));
 			if (maxSales <= 0) {
-				JOptionPane.showMessageDialog(null, "La cantidad de ventas debe ser mayor a 0");
+				JOptionPane.showMessageDialog(null, "La cantidad de ventas debe ser mayor a 0","Error",JOptionPane.ERROR_MESSAGE);
 			}
 		} while (maxSales <= 0);
 		sellsInformation = new int[maxSales][3];
@@ -80,7 +87,7 @@ public class Ejercicio2 {
 		int input = 0;
 		do {
 			if (numberOfSales == sellsInformation.length) {
-				JOptionPane.showMessageDialog(null, "No se pueden registrar mas ventas, la base esta llena");
+				JOptionPane.showMessageDialog(null, "No se pueden registrar mas ventas, la base esta llena" ,"Error",JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			
@@ -88,20 +95,28 @@ public class Ejercicio2 {
 			do {
 				code = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el codigo del producto (de 0 a " + (products.length - 1) + ")"));
 				if (code < 0 || code >= products.length) {
-					JOptionPane.showMessageDialog(null, "El codigo no existe");
+					JOptionPane.showMessageDialog(null, "El codigo no existe" ,"Error",JOptionPane.ERROR_MESSAGE);
 				}
 			} while (code < 0 || code >= products.length);
 
 			int quantity;
 			do {
-				String text = JOptionPane.showInputDialog(null, "Cantidad vendida de " + products[code]);
-				if (text == null) {
-					return;
-				}
-				quantity = Integer.parseInt(text);
-				if (quantity <= 0) {
-					JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0");
-				}
+			    String text = JOptionPane.showInputDialog(null, "Cantidad vendida de " + products[code]);
+			    if (text == null || text.trim().isEmpty()) {
+			        JOptionPane.showMessageDialog(null, "Como no pusiste ninguna cantidad volves al menu", "Warning", JOptionPane.WARNING_MESSAGE);
+			        return;
+			    }
+			    try {
+			        quantity = Integer.parseInt(text.trim());
+			    } 
+			    catch (NumberFormatException error) {
+			        JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+			        JOptionPane.showMessageDialog(null, error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
+			        quantity = 0;
+			    }
+			    if (quantity <= 0) {
+			        JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0");
+			    }
 			} while (quantity <= 0);
 
 			int amount = prices[code] * quantity;
@@ -118,7 +133,7 @@ public class Ejercicio2 {
 	
 	private void ShowSales() {
 		if (numberOfSales == 0) {
-			JOptionPane.showMessageDialog(null, "Todavia no hay ventas registradas");
+			JOptionPane.showMessageDialog(null, "Todavia no hay ventas registradas" ,"Error",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		String list = "Ventas realizadas:\n";
