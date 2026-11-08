@@ -15,8 +15,17 @@ public class Ejercicio3 {
 		int input;
 		do {
 			Play();
-			String number;
-			input = Integer.parseInt(JOptionPane.showInputDialog(null, "Presiona 0 para jugar otra ronda o cualquier otro numero para salir"));
+			String number = JOptionPane.showInputDialog(null, "Presiona 0 para jugar otra ronda o cualquier otro numero para salir");
+			if(number == null || number.trim().isEmpty()) {
+				input = -1;
+				continue;
+			}
+			try {
+				input = Integer.parseInt(number.trim());
+			} catch (NumberFormatException error) {
+				JOptionPane.showMessageDialog(null, "Debes Ingresar un valor numerico","Error",JOptionPane.ERROR_MESSAGE);
+				input = -1;
+			}
 		} while (input == 0);
 		JOptionPane.showMessageDialog(null, "Gracias por jugar!");
 	}
@@ -25,6 +34,9 @@ public class Ejercicio3 {
 		score = 0;
 		for (int i = 0; i < riddles.length; i++) {
 			String answer = JOptionPane.showInputDialog(null, "Adivinanza " + (i + 1) + ":\n" + riddles[i]);
+			if(answer == null) {
+				continue;
+			}
 			if (IsCorrect(i, answer)) {
 				score++;
 				JOptionPane.showMessageDialog(null, "Correcto! Sumas un punto");
