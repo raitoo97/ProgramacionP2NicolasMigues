@@ -111,7 +111,7 @@ public class Ejercicio2 {
 			numberOfSales++;
 
 			input = Integer.parseInt(JOptionPane.showInputDialog(null,
-					"Venta registrada: " + quantity + " x " + products[code] + " = $" + amount +
+					"Venta registrada: " + quantity + " unidades del producto " + products[code] + " a $" + prices[code] + " la unidad"+ " el total es  = $" + amount +
 					"\nPresiona 0 para registrar otra venta o cualquier otro numero para volver al menu"));
 		} while (input == 0);
 	}
@@ -124,7 +124,8 @@ public class Ejercicio2 {
 		String list = "Ventas realizadas:\n";
 		for (int i = 0; i < numberOfSales; i++) {
 			int code = sellsInformation[i][0];
-			list += "Venta " + (i + 1) + ": " + products[code] + " - Cantidad: " + sellsInformation[i][1] + " - Importe: $" + sellsInformation[i][2] + "\n";
+			list += "Venta " + (i) + ": " + products[code] + " - Cantidad : "
+					+ sellsInformation[i][1] + " - Importe: $" + sellsInformation[i][2] + "\n";
 		}
 		JOptionPane.showMessageDialog(null, list);
 	}
