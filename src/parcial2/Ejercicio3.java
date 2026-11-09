@@ -11,23 +11,28 @@ public class Ejercicio3 {
 	};
 
 	public void Excerice3() {
-		JOptionPane.showMessageDialog(null, "Hola bienvenido al juego de adivinanzas");
-		int input;
-		do {
-			Play();
-			String number = JOptionPane.showInputDialog(null, "Presiona 0 para jugar otra ronda o cualquier otro numero para salir");
-			if(number == null || number.trim().isEmpty()) {
-				input = -1;
-				continue;
-			}
-			try {
-				input = Integer.parseInt(number.trim());
-			} catch (NumberFormatException error) {
-				JOptionPane.showMessageDialog(null, "Debes Ingresar un valor numerico","Error",JOptionPane.ERROR_MESSAGE);
-				input = -1;
-			}
-		} while (input == 0);
-		JOptionPane.showMessageDialog(null, "Gracias por jugar!");
+	    JOptionPane.showMessageDialog(null, "Hola bienvenido al juego de adivinanzas");
+	    int input = 0;
+	    do {
+	        Play();
+	        boolean validAnswer;
+	        do {
+	            String number = JOptionPane.showInputDialog(null, "Presiona 0 para jugar otra ronda o cualquier otro numero para salir");
+	            if (number == null || number.trim().isEmpty()) {
+	                JOptionPane.showMessageDialog(null, "Debes Ingresar un valor numerico", "Error", JOptionPane.ERROR_MESSAGE);
+	                validAnswer = false;
+	                continue;
+	            }
+	            try {
+	                input = Integer.parseInt(number.trim());
+	                validAnswer = true;
+	            } catch (NumberFormatException error) {
+	                JOptionPane.showMessageDialog(null, "Debes Ingresar un valor numerico", "Error", JOptionPane.ERROR_MESSAGE);
+	                validAnswer = false;
+	            }
+	        } while (!validAnswer);
+	    } while (input == 0);
+	    JOptionPane.showMessageDialog(null, "Gracias por jugar!");
 	}
 
 	private void Play() {
