@@ -11,7 +11,7 @@ public class Ejercicio2 {
 	private int numberOfSales = 0;
 	
 	public void Excerice2() {
-		JOptionPane.showMessageDialog(null, "Hola bienvenido al programa de la tienda: \"Profe porfa aprobame :D\" ");
+		JOptionPane.showMessageDialog(null, "Hola bienvenido al programa de la tienda: \"Asistencia ATI\" ");
 		RegisterProducts();
 		CreateSalesMatrix();
 		Menu();
@@ -67,6 +67,7 @@ public class Ejercicio2 {
 		} while (option != 4);
 	}
 	
+
 	private void RegisterProducts() {
 		int numberOfProducts;
 		do {
@@ -126,7 +127,7 @@ public class Ejercicio2 {
 	private void CreateSalesMatrix() {
 		int maxSales;
 		do {
-			String number = JOptionPane.showInputDialog(null, "Cuantas ventas como maximo queres registrar?");
+			String number = JOptionPane.showInputDialog(null, "Cuantas ventas como maximo queres registrar el dia de hoy?");
 			if (number == null || number.trim().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Tenes que ingresar la cantidad de ventas", "Error", JOptionPane.ERROR_MESSAGE);
 				maxSales = 0;
@@ -146,7 +147,7 @@ public class Ejercicio2 {
 		} while (maxSales <= 0);
 		sellsInformation = new int[maxSales][3];
 	}
-	
+	// Registrar una venta.
 	private void RecordSales() {
 		int input = 0;
 		do {
@@ -159,8 +160,9 @@ public class Ejercicio2 {
 			do {
 				String number = JOptionPane.showInputDialog(null, "Ingrese el codigo del producto (de 0 a " + (products.length - 1) + ")");
 				if (number == null || number.trim().isEmpty()) {
-				    JOptionPane.showMessageDialog(null, "Volviendo al menu");
-				    return;
+				    JOptionPane.showMessageDialog(null, "Ingrese un codigo valido!","Error",JOptionPane.ERROR_MESSAGE );
+				    code = -1;
+				    continue;
 				}
 				try {
 					code = Integer.parseInt(number.trim());
@@ -178,8 +180,9 @@ public class Ejercicio2 {
 			do {
 			    String number = JOptionPane.showInputDialog(null, "Cantidad vendida de " + products[code]);
 			    if (number == null || number.trim().isEmpty()) {
-			        JOptionPane.showMessageDialog(null, "Como no pusiste ninguna cantidad volves al menu", "Warning", JOptionPane.WARNING_MESSAGE);
-			        return;
+			        JOptionPane.showMessageDialog(null, "Tenes que ingresar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+			        quantity = 0;
+			        continue;
 			    }
 			    try {
 			        quantity = Integer.parseInt(number.trim());
@@ -223,10 +226,10 @@ public class Ejercicio2 {
 			numberOfSales++;
 		} while (input == 0);
 	}
-	
+	// Mostrar las ventas realizadas.
 	private void ShowSales() {
 		if (numberOfSales == 0) {
-			JOptionPane.showMessageDialog(null, "Todavia no hay ventas registradas" ,"Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Todavia no hay ventas registradas" ,"Error",JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 		String list = "Ventas realizadas:\n";
@@ -237,7 +240,7 @@ public class Ejercicio2 {
 		}
 		JOptionPane.showMessageDialog(null, list);
 	}
-	
+	// Calcular el total recaudado.
 	private int CalculateTotal() {
 		int total = 0;
 		for (int i = 0; i < numberOfSales; i++) {
@@ -245,10 +248,10 @@ public class Ejercicio2 {
 		}
 		return total;
 	}
-	
+	// Mostrar el producto más vendido.
 	private void ShowBestSellingProduct() {
 		if (numberOfSales == 0) {
-			JOptionPane.showMessageDialog(null, "Todavia no hay ventas registradas");
+			JOptionPane.showMessageDialog(null, "Todavia no hay ventas registradas","Error",JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 		int[] quantityPerProduct = new int[products.length];

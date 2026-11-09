@@ -86,7 +86,7 @@ public class Ejercicio1 {
 					continue;
 				}
 				if (grade < 0 || grade > 10) {
-					JOptionPane.showMessageDialog(null, "Nota incorrecta\nLa nota debe ir entre 0 y 10");
+					JOptionPane.showMessageDialog(null, "Nota incorrecta\nLa nota debe ir entre 0 y 10","Error", JOptionPane.ERROR_MESSAGE);
 				}else {
 					JOptionPane.showMessageDialog(null, "Nota ingresada con exito!");
 				}
