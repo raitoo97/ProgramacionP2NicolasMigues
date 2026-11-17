@@ -19,6 +19,7 @@ public class Ejercicio1 {
 		    do {
 		        String answer = JOptionPane.showInputDialog(null, "Presiona 0 si deseas volver a consultar la nota o presiona cualquier otro numero para salir");
 		        if (answer == null || answer.trim().isEmpty()) {
+		            JOptionPane.showMessageDialog(null, "Debes ingresar un valor numerico", "Error", JOptionPane.ERROR_MESSAGE);
 		        	validAnswer = false;
 		        	continue;
 		        }
